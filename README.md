@@ -1,6 +1,7 @@
 # COEN-6311-Quantum
 Software project to build The Concordia Travel business web application that sells travel packages to customers. 
 
+
 Sprint 1: Package Management
 
 Step 1: Setup and Environment Configuration
@@ -23,6 +24,8 @@ Integrate Bootstrap for visual design.
 Ensure responsive design for different devices.
 
 
+
+
 Sprint 2: Booking Management
 
 Step 1: Booking and Customer Classes
@@ -42,7 +45,12 @@ Design and implement a user interface for customers to view and manage their boo
 Implement error-handling modules.
 Integrate ngx-toastr for user notifications.
 
+
+
+
+
 Sprint 3: Agent Management
+
 Step 1: Agent and Report Classes
 Tasks:
 Create classes for representing agents, reports, and notifications.
