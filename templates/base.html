@@ -1,0 +1,70 @@
+<!-- base.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Concordia Travel{% endblock %}</title>
+    <!-- Add your CSS links or stylesheets here -->
+    <style>
+        /* Add your custom styles here */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .styled-section {
+            background-color:lightgrey; ;
+            padding: 50px;
+            border: 5px solid #ddd;
+        }
+
+        .content {
+            margin-top: 50px;
+            padding: 20px;
+            font-size: 24px; /* Adjust the font size as needed */
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>{% block header %}Concordia Travel{% endblock %}</h1>
+    </div>
+
+    <div class="styled-section">
+        {% block styled_section %}
+            <p>Concordia Travel is your gateway to unparalleled travel experiences, seamlessly blending adventure and relaxation to create unforgettable journeys. With a commitment to excellence, we curate travel packages that transcend conventional boundaries, offering a diverse array of destinations and activities that cater to every wanderlust-driven soul.
+
+                Our travel offerings span the globe, from the sun-kissed beaches of tropical paradises to the culturally rich landscapes of historical wonders. </p> <p> Whether you seek the thrill of exploration, the serenity of a secluded retreat, or the vibrancy of urban escapades-Concordia Travel crafts personalized itineraries to meet the unique desires of each traveler.
+
+At the heart of our mission is a dedication to providing not just vacations but transformative experiences. Our meticulously designed packages encompass a spectrum of options, including flights, accommodations, and activities, ensuring that every aspect of your journey aligns with your vision of the perfect getaway.
+
+</p>
+            <P>Concordia Travel is more than a travel agency; it's a portal to a world of discovery. We believe that travel goes beyond the destination—it's about immersing yourself in the essence of each place, connecting with diverse cultures, and creating memories that last a lifetime. Trust us to turn your travel dreams into a reality, guiding you through a tapestry of destinations with unmatched expertise and a passion for exploration. Your journey begins with Concordia Travel – where every adventure is crafted with care, precision, and an unwavering commitment to delivering excellence.</p>
+        {% endblock %}
+    </div>
+
+    <div class="content">
+        {% block content %}{% endblock %}
+    </div>
+
+</body>
+</html>
+

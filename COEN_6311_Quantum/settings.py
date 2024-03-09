@@ -25,8 +25,20 @@ SECRET_KEY = 'django-insecure-!c-sezpd+52nh29&fpybq8=v+=xq%g&pd%do_j7_9^3u-bw-$7
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
+# Django REST framework settings (optional but recommended)
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+}
+
+APPEND_SLASH = False
 
 # Application definition
 
@@ -37,6 +49,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'travelConcordia',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -47,6 +62,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+
 ]
 
 ROOT_URLCONF = 'COEN_6311_Quantum.urls'
@@ -116,9 +133,28 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+LOGIN_URL = '/login/'
+LOGIN_REDIRECT_URL = '/api/packages/'
+auto_logout = '/logout/'
+
+# CORS settings
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:4200",
+    "https://concordia-travels.com",
+]
+CORS_ORIGIN_ALLOWED_ALL = True
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_HEADERS = [
+    'accept',
+    'accept-encoding',]
+
+# Stripe settings
+# Add your Stripe API keys
+STRIPE_PUBLIC_KEY = 'pk_test_51MMyCsB7h5AGHeHRV0SL3ib0Gdke8G0pw8umvVCOvf2GLWjmRWxzB0mUI4RPeDf1jbW8YEEpTXbOlwXw3ukrScxu00DRXaUpZK'
+STRIPE_SECRET_KEY = 'sk_test_51MMyCsB7h5AGHeHRrlJkNCYpemHHdUM9IfHzkkT8d5rsE6iISZGUKnfMBw1L6UhSEZPzKS1yRwFEyzj5Ynsy0Lkf002IHYiaZE'
