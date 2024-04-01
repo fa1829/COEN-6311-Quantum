@@ -1,18 +1,18 @@
+from rest_framework import status
 from django.shortcuts import render
-from django.http import Http404
-from rest_framework.permissions import IsAuthenticated
-from rest_framework.views import APIView
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 from rest_framework.response import Response
-from rest_framework import status, viewsets
-from rest_framework import serializers
-from .models import (Hotels, StatusTypes, RoomTypes, HotelRooms, Airports,
-                     AirLines, FlightCategories, TripTypes, Flights,
-                     Activities, TravelPackages, Locations, VwTravelPackage)
+from rest_framework.views import APIView
+from rest_framework import permissions
 
+from .models import (Hotels, StatusTypes, RoomTypes, HotelRooms, Airports,
+                     AirLines, FlightCategories, Flights,
+                     Activities, TravelPackages, Locations, BookingInfo, VwTravelPackage)
 from .serializers import (HotelsSerializer, StatusTypesSerializer, RoomTypesSerializer, HotelRoomsSerializer,
-                          AirportsSerializer, AirlinesSerializer, FlightCategoriesSerializer, TripTypesSerializer,
-                          FlightsSerializer, ActivitiesSerializer,
+                          AirportsSerializer, AirlinesSerializer, FlightCategoriesSerializer, FlightsSerializer,
+                          ActivitiesSerializer,
                           TravelPackagesSerializer, LocationsSerializer, FlightDropDownSerializer,
+                          BookingInfoSerializer,
                           VwTravelPackagesSerializer)
 
 
@@ -52,6 +52,8 @@ class LocationsListView(APIView):
         locations = Locations.objects.get(pk=pk)
         locations.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
 # Status Types CRUD operation class
 class StatusTypesListView(APIView):
     serializer_class = StatusTypesSerializer
@@ -279,6 +281,7 @@ class AirlinesListView(APIView):
         airlines.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
+
 # Flight Categories CRUD
 class FlightCategoriesListView(APIView):
     serializer_class = FlightCategoriesSerializer
@@ -316,7 +319,8 @@ class FlightCategoriesListView(APIView):
         flight_categories.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
-#Flights CRUD
+
+# Flights CRUD
 class FlightsListView(APIView):
     serializer_class = FlightsSerializer
 
@@ -352,6 +356,7 @@ class FlightsListView(APIView):
         flights = Flights.objects.get(pk=pk)
         flights.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
 
 # Activities CRUD
 class ActivitiesListView(APIView):
@@ -389,10 +394,14 @@ class ActivitiesListView(APIView):
         activity = Activities.objects.get(pk=pk)
         activity.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
 # Travel Package CRUD operation
+
 class TravelPackagesListView(APIView):
     serializer_class = TravelPackagesSerializer
     # permission_classes = [IsAuthenticated]
+
     def get(self, request, pk=None, format=None):
         if pk:
             # Detail view logic
@@ -418,10 +427,9 @@ class TravelPackagesListView(APIView):
         serializer = self.serializer_class(travel_packages, data=request.data)
         if serializer.is_valid():
             serializer.save()
-            #serializer.save(user=request.user)
+            # serializer.save(user=request.user)
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
 
     def delete(self, request, pk, format=None):
         travel_package = TravelPackages.objects.get(pk=pk)
@@ -429,14 +437,58 @@ class TravelPackagesListView(APIView):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
-class FlightDropdownViewSet(APIView):
-    def get(self, request):
-        flightdropdown = Flights.objects.all()
-        serializer = FlightDropDownSerializer(flightdropdown, many=True)
+class BookingInfoListView(APIView):
+    serializer_class = BookingInfoSerializer
+    def get(self, request, pk=None, format=None):
+        if pk:
+            # Detail view logic
+            bookinginfo = BookingInfo.objects.get(pk=pk)
+            serializer = self.serializer_class(bookinginfo)
+
+        else:
+            # List view logic
+            bookinginfo = BookingInfo.objects.all()
+            serializer = HotelsSerializer(bookinginfo, many=True)
+
         return Response(serializer.data)
+
+    def post(self, request, format=None):
+        serializer = self.serializer_class(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def put(self, request, pk, format=None):
+        bookinginfo = BookingInfo.objects.get(pk=pk)
+        serializer = self.serializer_class(bookinginfo, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, pk, format=None):
+        bookinginfo = BookingInfo.objects.get(pk=pk)
+        bookinginfo.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+class FlightDropdownViewSet(APIView):
+    def get(self, request, pk=None):
+        if pk:
+            flightdropdown = Flights.objects.get(pk=pk)
+            serializer = FlightDropDownSerializer(flightdropdown)
+            return Response(serializer.data)
+        else:
+            flightdropdown = Flights.objects.all()
+            serializer = FlightDropDownSerializer(flightdropdown, many=True)
+            return Response(serializer.data)
 
 
 class VwTravelPackageViewSet(APIView):
+    # authentication_classes = [SessionAuthentication, BasicAuthentication]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
     def get(self, request, pk=None):
         if pk:
             vwpackage = VwTravelPackage.objects.get(pk=pk)
@@ -446,5 +498,3 @@ class VwTravelPackageViewSet(APIView):
             vwpackage = VwTravelPackage.objects.all()
             serializer = VwTravelPackagesSerializer(vwpackage, many=True)
             return Response(serializer.data)
-
-

@@ -85,7 +85,19 @@ class TravelPackages(models.Model):
     Activity_ID = models.ForeignKey(Activities, on_delete=models.CASCADE, null=True)
     Package_Price = models.DecimalField(max_digits=6, decimal_places=2, null=True)
     Package_Description = models.CharField(max_length=200, null=True)
+    Package_Image = models.CharField(max_length=500, null=True)
     user = models.ForeignKey('auth.User', related_name='tpackages', on_delete=models.CASCADE, null=True)
+
+
+# class CustomTravelPackages(models.Model):
+#     Custom_Package_Name = models.CharField(max_length=200, null=True)
+#     Location_ID = models.ForeignKey(Locations, on_delete=models.CASCADE, null=True)
+#     Flight_ID = models.ForeignKey(Flights, on_delete=models.CASCADE, null=True)
+#     Hotel_Rooms_ID = models.ForeignKey(HotelRooms, on_delete=models.CASCADE, null=True)
+#     Activity_ID = models.ForeignKey(Activities, on_delete=models.CASCADE, null=True)
+#     Package_Price = models.DecimalField(max_digits=6, decimal_places=2, null=True)
+#     Package_Description = models.CharField(max_length=200, null=True)
+#     user = models.ForeignKey('auth.User', related_name='cpackages', on_delete=models.CASCADE, null=True)
 
 
 class VwTravelPackage(models.Model):
@@ -101,10 +113,44 @@ class VwTravelPackage(models.Model):
     HotelRoom = models.CharField(max_length=200, null=True)
     ActivityID = models.IntegerField(null=True)
     Activity_Name = models.CharField(max_length=200, null=True)
+    AirlineID = models.IntegerField(null=True)
+    Airline_name = models.CharField(max_length=200, null=True)
+    Room_Image = models.CharField(max_length=200, null=True)
+    Package_Image = models.CharField(max_length=500, null=True)
 
     class Meta:
         managed = False
         db_table = 'vw_TravelPackage'
+
+
+# class PaymentInfo(models.Model):
+#     Travel_Package_ID = models.ForeignKey(TravelPackages, on_delete=models.CASCADE, null=True)
+#     Customer_ID = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+#     Payment = models.DecimalField(max_digits=10, decimal_places=2, null=True)
+#     Payment_Date = models.DateField(null=True)
+
+
+class BookingInfo(models.Model):
+    Package_ID = models.ForeignKey(TravelPackages, on_delete=models.CASCADE, null=True)
+    Customer_ID = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    Card_Number = models.IntegerField(null=True)
+    Expiry_Date = models.CharField(max_length=8, null=True)
+    CVC_Number = models.IntegerField(null=True)
+    Payment_Amount = models.DecimalField(max_digits=10, decimal_places=2, null=True)
+    Booking_Date = models.DateTimeField(null=True)
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

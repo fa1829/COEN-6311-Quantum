@@ -1,10 +1,9 @@
-from django.urls import path, include
 from django.urls import path
 from rest_framework.urlpatterns import format_suffix_patterns
 from .views import (StatusTypesListView, RoomTypesListView, HotelsListView,
                     TravelPackagesListView, HotelRoomsListView, AirportListView, AirlinesListView,
                     FlightsListView, FlightCategoriesListView, ActivitiesListView, LocationsListView,
-                    FlightDropdownViewSet, VwTravelPackageViewSet)
+                    FlightDropdownViewSet, VwTravelPackageViewSet, BookingInfoListView)
 
 
 urlpatterns = [
@@ -16,6 +15,8 @@ urlpatterns = [
     path('hotels/<int:pk>/', HotelsListView.as_view()),
     path('travelpackages/', TravelPackagesListView.as_view()),
     path('travelpackages/<int:pk>/', TravelPackagesListView.as_view()),
+    path('bookinginfo/', BookingInfoListView.as_view()),
+    path('bookinginfo/<int:pk>/', BookingInfoListView.as_view()),
     path('hotelsrooms/', HotelRoomsListView.as_view()),
     path('hotelsrooms/<int:pk>/', HotelRoomsListView.as_view()),
     path('airport/', AirportListView.as_view()),
@@ -31,7 +32,9 @@ urlpatterns = [
     path('locations/', LocationsListView.as_view()),
     path('locations/<int:pk>/', LocationsListView.as_view()),
     path('flightdropdown/', FlightDropdownViewSet.as_view()),
+    path('flightdropdown/<int:pk>', FlightDropdownViewSet.as_view()),
     path('vwtravelpackages/', VwTravelPackageViewSet.as_view()),
     path('vwtravelpackages/<int:pk>/', VwTravelPackageViewSet.as_view()),
+
 
 ]
