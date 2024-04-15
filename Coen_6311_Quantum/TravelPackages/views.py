@@ -6,14 +6,14 @@ from rest_framework.views import APIView
 from rest_framework import permissions
 
 from .models import (Hotels, StatusTypes, RoomTypes, HotelRooms, Airports,
-                     AirLines, FlightCategories, Flights,
-                     Activities, TravelPackages, Locations, BookingInfo, VwTravelPackage)
+                     AirLines, FlightCategories, Flights, VwHotelRoom,
+                     Activities, TravelPackages, Locations, BookingInfo, VwTravelPackage, VwBookingInfo)
 from .serializers import (HotelsSerializer, StatusTypesSerializer, RoomTypesSerializer, HotelRoomsSerializer,
                           AirportsSerializer, AirlinesSerializer, FlightCategoriesSerializer, FlightsSerializer,
                           ActivitiesSerializer,
                           TravelPackagesSerializer, LocationsSerializer, FlightDropDownSerializer,
-                          BookingInfoSerializer,
-                          VwTravelPackagesSerializer)
+                          BookingInfoSerializer,VwTravelPackagesSerializer,
+                          VwHotelRoomsSerializer, VwBookingInfoSerializer)
 
 
 # Locations CRUD
@@ -497,4 +497,33 @@ class VwTravelPackageViewSet(APIView):
         else:
             vwpackage = VwTravelPackage.objects.all()
             serializer = VwTravelPackagesSerializer(vwpackage, many=True)
+            return Response(serializer.data)
+
+
+class VwHotelRoomViewSet(APIView):
+    # authentication_classes = [SessionAuthentication, BasicAuthentication]
+    # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+    def get(self, request, pk=None):
+        if pk:
+            vwhotelroom = VwHotelRoom.objects.get(pk=pk)
+            serializer = VwHotelRoomsSerializer(vwhotelroom)
+            return Response(serializer.data)
+        else:
+            vwhotelroom = VwHotelRoom.objects.all()
+            serializer = VwHotelRoomsSerializer(vwhotelroom, many=True)
+            return Response(serializer.data)
+
+class VwBookingInfoViewSet(APIView):
+    # authentication_classes = [SessionAuthentication, BasicAuthentication]
+    # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+    def get(self, request, pk=None):
+        if pk:
+            vwbookinginfo = VwBookingInfo.objects.get(pk=pk)
+            serializer = VwBookingInfoSerializer(vwbookinginfo)
+            return Response(serializer.data)
+        else:
+            vwbookinginfo = VwBookingInfo.objects.all()
+            serializer = VwBookingInfoSerializer(vwbookinginfo, many=True)
             return Response(serializer.data)

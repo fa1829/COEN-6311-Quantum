@@ -20,4 +20,5 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('Coen_6311_Quantum.TravelPackages.urls')),
+    path('api/', include('Coen_6311_Quantum.users.urls'))
 ]

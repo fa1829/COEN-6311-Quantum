@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from .models import (Hotels, StatusTypes, RoomTypes, HotelRooms, Airports,
                      AirLines, FlightCategories, TripTypes, Flights,
-                     Activities, TravelPackages, Locations, BookingInfo, VwTravelPackage)
+                     Activities, TravelPackages, Locations, BookingInfo, VwTravelPackage, VwHotelRoom, VwBookingInfo)
 
 
 class HotelsSerializer(serializers.ModelSerializer):
@@ -91,4 +91,14 @@ class BookingInfoSerializer(serializers.ModelSerializer):
 class VwTravelPackagesSerializer(serializers.ModelSerializer):
     class Meta:
         model = VwTravelPackage
+        fields = '__all__'
+
+
+class VwHotelRoomsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = VwHotelRoom
+        fields = '__all__'
+class VwBookingInfoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = VwBookingInfo
         fields = '__all__'

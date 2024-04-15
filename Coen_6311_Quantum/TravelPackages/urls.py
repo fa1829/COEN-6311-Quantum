@@ -3,7 +3,8 @@ from rest_framework.urlpatterns import format_suffix_patterns
 from .views import (StatusTypesListView, RoomTypesListView, HotelsListView,
                     TravelPackagesListView, HotelRoomsListView, AirportListView, AirlinesListView,
                     FlightsListView, FlightCategoriesListView, ActivitiesListView, LocationsListView,
-                    FlightDropdownViewSet, VwTravelPackageViewSet, BookingInfoListView)
+                    FlightDropdownViewSet, VwTravelPackageViewSet, BookingInfoListView,
+                    VwHotelRoomViewSet, VwBookingInfoViewSet)
 
 
 urlpatterns = [
@@ -35,6 +36,10 @@ urlpatterns = [
     path('flightdropdown/<int:pk>', FlightDropdownViewSet.as_view()),
     path('vwtravelpackages/', VwTravelPackageViewSet.as_view()),
     path('vwtravelpackages/<int:pk>/', VwTravelPackageViewSet.as_view()),
+    path('vwhotelroom/', VwHotelRoomViewSet.as_view()),
+    path('vwhotelroom/<int:pk>/', VwHotelRoomViewSet.as_view()),
+    path('vwbookinginfo/', VwBookingInfoViewSet.as_view()),
+    path('vwbookinginfo/<int:pk>/', VwBookingInfoViewSet.as_view()),
 
 
 ]
