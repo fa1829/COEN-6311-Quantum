@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="860b0826-48d2-4902-b9f6-d692a0766eb6" name="Changes" comment="Latest Django RestFramework update" />
+    <list default="true" id="860b0826-48d2-4902-b9f6-d692a0766eb6" name="Changes" comment="Latest Django RestFramework update">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -42,6 +44,7 @@
     "RunOnceActivity.OpenDjangoStructureViewOnStart": "true",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
     "last_opened_file_path": "D:/Githubtest",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -120,7 +123,15 @@
       <option name="project" value="LOCAL" />
       <updated>1713148278674</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Latest Django RestFramework update">
+      <option name="closed" value="true" />
+      <created>1713149989498</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1713149989498</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -130,6 +141,8 @@
     <MESSAGE value="Initial Project" />
     <MESSAGE value="First Push Django RestFramework" />
     <MESSAGE value="Latest updates Django RestFramework" />
-    <option name="LAST_COMMIT_MESSAGE" value="Latest updates Django RestFramework" />
+    <MESSAGE value="Latest Django RestFramework code" />
+    <MESSAGE value="Latest Django RestFramework update" />
+    <option name="LAST_COMMIT_MESSAGE" value="Latest Django RestFramework update" />
   </component>
 </project>
